@@ -1,4 +1,4 @@
-//#include "highc/vector.h"
+#include "../highc/vector.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -47,6 +47,8 @@ int test_vector()
 		printf("vector filter failed\n");
 		errors++;
 	}
+	printf("using vector print\n");
+	vector_print(tmparr, LEN, "%s", "\t", 1);
 	for_vector(txt, index, tmparr, LEN) {
 		if(*txt) {
 			printf("%s\n", *txt);

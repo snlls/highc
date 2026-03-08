@@ -602,12 +602,19 @@ static void _defer_handle_nest(char *func)
 
 /** @brief macro that print each element with given fmt, adds newline after loop is done. Mainly for debugging.
  * @param src[in] vector
- * @param fmt format string used for each element
- * @param ending string that comes after each element
+ * @param len vector length
+ * @param fmt format string used for each element, needs to be compile time string
+ * @param prefix prefix to add to each element
+ * @param newline_n if positive add newline after n elements
  */
-#define vector_printe(src, len, fmt, ending) do {			\
-		for (unsigned _index = 0; _index < (len); _index++)	\
-			printf(fmt ending, src[_index]);		\
+#define vector_print(src, len, fmt, prefix, newline_n) do {		\
+		for (unsigned _index = 0, newline_counter = 0; _index < (len); _index++) { \
+			printf(prefix fmt, src[_index]);		\
+			if(newline_n && ++newline_counter >= newline_n) { \
+				newline_counter = 0;			\
+				printf("\n");				\
+			}						\
+		}							\
 		puts("");						\
 	} while(0)
 

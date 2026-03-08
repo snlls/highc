@@ -41,19 +41,12 @@
 
 #define MAP_PAIR0(f, x, y, peek, ...) f(x, y) MAP_NEXT(peek, MAP_PAIR1)(f, peek, __VA_ARGS__)
 #define MAP_PAIR1(f, x, y, peek, ...) f(x, y) MAP_NEXT(peek, MAP_PAIR0)(f, peek, __VA_ARGS__)
-
-/// Applies the function macro `f` to each pair of the remaining parameters and
 #define MAP_PAIR(f, ...) EVAL(MAP_PAIR1(f, __VA_ARGS__, ()()(), ()()(), ()()(), 0))
 
-#define MAP_PAIR_OBJ0(f, obj, x, y, peek, ...) f(obj, x, y) MAP_NEXT(peek, MAP_PAIR_OBJ1)(f, obj, peek, __VA_ARGS__)
-#define MAP_PAIR_OBJ1(f, obj, x, y, peek, ...) f(obj, x, y) MAP_NEXT(peek, MAP_PAIR_OBJ0)(f, obj, peek, __VA_ARGS__)
+#define MAP_TRIPLE0(f, x, y, z, peek, ...) f(x, y, z) MAP_NEXT(peek, MAP_TRIPLE1)(f, peek, __VA_ARGS__)
+#define MAP_TRIPLE1(f, x, y, z, peek, ...) f(x, y, z) MAP_NEXT(peek, MAP_TRIPLE0)(f, peek, __VA_ARGS__)
+#define MAP_TRIPLE(f, ...) EVAL(MAP_TRIPLE1(f, __VA_ARGS__, ()()(), ()()(), ()()(), 0))
 
-/// Applies the function macro `f` to each pair of the remaining parameters and
-#define MAP_PAIR_OBJ(f, obj, ...) EVAL(MAP_PAIR_OBJ1(f, obj, __VA_ARGS__, ()()(), ()()(), ()()(), 0))
-
-#define MAP_PAIR_FUNC0(f, func, obj, x, y, peek, ...) f(func, obj, x, y) MAP_NEXT(peek, MAP_PAIR_FUNC1)(f, func, obj, peek, __VA_ARGS__)
-#define MAP_PAIR_FUNC1(f, func, obj, x, y, peek, ...) f(func, obj, x, y) MAP_NEXT(peek, MAP_PAIR_FUNC0)(f, func, obj, peek, __VA_ARGS__)
-
-/// Applies the function macro `f` to each pair of the remaining parameters and
-#define MAP_PAIR_FUNC(f, func, obj, ...) EVAL(MAP_PAIR_FUNC1(f, func, obj, __VA_ARGS__, ()()(), ()()(), ()()(), 0))
-
+#define MAP_QUINT0(f, x, y, z, w, q, peek, ...) f(x, y, z, w, q) MAP_NEXT(peek, MAP_QUINT1)(f, peek, __VA_ARGS__)
+#define MAP_QUINT1(f, x, y, z, w, q, peek, ...) f(x, y, z, w, q) MAP_NEXT(peek, MAP_QUINT0)(f, peek, __VA_ARGS__)
+#define MAP_QUINT(f, ...) EVAL(MAP_QUINT1(f, __VA_ARGS__, ()()(), ()()(), ()()(), 0))
