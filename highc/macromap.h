@@ -47,6 +47,10 @@
 #define MAP_TRIPLE1(f, x, y, z, peek, ...) f(x, y, z) MAP_NEXT(peek, MAP_TRIPLE0)(f, peek, __VA_ARGS__)
 #define MAP_TRIPLE(f, ...) EVAL(MAP_TRIPLE1(f, __VA_ARGS__, ()()(), ()()(), ()()(), 0))
 
+#define MAP_TRIPLE0_ARG(f, arg, x, y, z, peek, ...) f(arg, x, y, z) MAP_NEXT(peek, MAP_TRIPLE1_ARG)(f, arg, peek, __VA_ARGS__)
+#define MAP_TRIPLE1_ARG(f, arg, x, y, z, peek, ...) f(arg, x, y, z) MAP_NEXT(peek, MAP_TRIPLE0_ARG)(f, arg, peek, __VA_ARGS__)
+#define MAP_TRIPLE_ARG(f, arg, ...) EVAL(MAP_TRIPLE1_ARG(f, arg, __VA_ARGS__, ()()(), ()()(), ()()(), 0))
+
 #define MAP_QUINT0(f, x, y, z, w, q, peek, ...) f(x, y, z, w, q) MAP_NEXT(peek, MAP_QUINT1)(f, peek, __VA_ARGS__)
 #define MAP_QUINT1(f, x, y, z, w, q, peek, ...) f(x, y, z, w, q) MAP_NEXT(peek, MAP_QUINT0)(f, peek, __VA_ARGS__)
 #define MAP_QUINT(f, ...) EVAL(MAP_QUINT1(f, __VA_ARGS__, ()()(), ()()(), ()()(), 0))
